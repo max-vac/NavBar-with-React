@@ -4,18 +4,14 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
 
-function Sidebar() {
+function Sidebar({ listItems }) {
   return (
     <List disablePadding dense>
-      <ListItem button>
-        <ListItemText>Home</ListItemText>
-      </ListItem>
-      <ListItem button>
-        <ListItemText>Something</ListItemText>
-      </ListItem>
-      <ListItem button>
-        <ListItemText>Something Else</ListItemText>
-      </ListItem>
+      { listItems.map(({ label, name }) => (
+        <ListItem key={ name } button={ name }>
+          <ListItemText>{ label }</ListItemText>
+        </ListItem>
+      ))}
     </List>
   )
 }
