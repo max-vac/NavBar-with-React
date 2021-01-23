@@ -9,7 +9,13 @@ const listItems = [
     listItems: [
       { name: 'orders', label: 'Orders'},
       { name: 'recent purchases', label: 'Recent Purchases'},
-      { name: 'cart', label: 'Cart'}
+      { name: 'cart',
+        label: 'Cart',
+        listItems: [
+          { name: 'recently added', label: 'Recently Added' },
+          { name: 'go to cart', label: 'Go To Cart' }
+        ]
+    }
     ]
   },
   { name: 'account',

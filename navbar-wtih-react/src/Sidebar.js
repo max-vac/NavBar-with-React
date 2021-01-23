@@ -8,27 +8,40 @@ const style = {
   border: "1px solid rgba(0, 0, 0, 0.1)",
 };
 
-function Sidebar({ listItems }) {
+function SidebarItems({ label, listItems, depthStep = 10, depth = 0, ...rest}) {
   return (
-    <div className="sidebar">
-      <List style={ style } disablePadding dense>
-        { listItems.map(({ label, name, listItems }) => (
-          <React.Fragment key={ name }>
-          <ListItem key={ name } button={ name } style={{ paddingLeft: 20}}>
-            <ListItemText>{ label }</ListItemText>
-          </ListItem>
-            {Array.isArray(listItems) ? (
-              <List disablePadding>
-                {listItems.map((items) => (
-                  <ListItem key={items.name} button>
-                    <ListItemText className="side-bar-text">
-                      { items.label }
-                    </ListItemText>
-                  </ListItem>
-                ))}
-              </List>
-            ) : null }
-          </React.Fragment>
+    <div>
+      <ListItem button dense {...rest}>
+        <ListItemText style={{ paddingLeft: depth * depthStep }}>
+          <span>{label}</span>
+        </ListItemText>
+      </ListItem>
+      {Array.isArray(listItems) ? (
+        <List disablePadding dense>
+          { listItems.map((items) => (
+            <SidebarItems
+              key={ items.name }
+              depth={ depth + 1}
+              depthStep={ depthStep }
+              {...items}
+            />
+          ))}
+        </List>
+      ) : null }
+    </div>
+  );
+}
+function Sidebar({ listItems, depthStep, depth }) {
+  return (
+    <div style={ style }>
+      <List disablePadding dense>
+        {listItems.map(( item, index ) => (
+          <SidebarItems
+            key={ `${item}${index}`}
+            depthStep={ depthStep }
+            depth={ depth }
+            { ...item }
+          />
         ))}
       </List>
     </div>
