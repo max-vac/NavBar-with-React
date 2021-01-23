@@ -10,13 +10,28 @@ const style = {
 
 function Sidebar({ listItems }) {
   return (
-    <List style={ style } disablePadding dense>
-      { listItems.map(({ label, name }) => (
-        <ListItem key={ name } button={ name }>
-          <ListItemText>{ label }</ListItemText>
-        </ListItem>
-      ))}
-    </List>
+    <div className="sidebar">
+      <List style={ style } disablePadding dense>
+        { listItems.map(({ label, name, listItems }) => (
+          <React.Fragment key={ name }>
+          <ListItem key={ name } button={ name } style={{ paddingLeft: 20}}>
+            <ListItemText>{ label }</ListItemText>
+          </ListItem>
+            {Array.isArray(listItems) ? (
+              <List disablePadding>
+                {listItems.map((items) => (
+                  <ListItem key={items.name} button>
+                    <ListItemText className="side-bar-text">
+                      { items.label }
+                    </ListItemText>
+                  </ListItem>
+                ))}
+              </List>
+            ) : null }
+          </React.Fragment>
+        ))}
+      </List>
+    </div>
   )
 }
 

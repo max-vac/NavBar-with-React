@@ -1,16 +1,31 @@
+import { amber } from '@material-ui/core/colors';
 import logo from './logo.svg';
 import Sidebar from './Sidebar';
 
 const listItems = [
   { name: 'home', label: 'Home' },
-  { name: 'something', label: 'Something' },
-  { name: 'something else', label: 'Something Else' }
+  { name: 'menu',
+    label: 'Menu',
+    listItems: [
+      { name: 'orders', label: 'Orders'},
+      { name: 'recent purchases', label: 'Recent Purchases'},
+      { name: 'cart', label: 'Cart'}
+    ]
+  },
+  { name: 'account',
+    label: 'Account',
+    listItems: [
+      { name: 'information', label: 'Information' },
+      { name: 'payments', label: 'Payments' },
+      { name: 'settings', label: 'Settings' }
+    ]
+  }
 ];
 
 
 const App = () => {
   return (
-    <Sidebar listItems={ listItems } style={{ color: "red"}}  />
+    <Sidebar listItems={ listItems } />
   )
 }
 
