@@ -9,11 +9,6 @@ const listItems = [
 
 
 const App = () => {
-  const style = {
-    maxWidth: "200px",
-    border: "1px solid rgba(0, 0, 0, 0.1)",
-    color: "blue"
-  };
   return (
     <Sidebar listItems={ listItems } style={{ color: "red"}}  />
   )
