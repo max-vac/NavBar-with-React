@@ -10,33 +10,51 @@ import PaymentIcon from '@material-ui/icons/Payment';
 import InfoIcon from '@material-ui/icons/Info';
 import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
-const listItems = [
-  { name: 'home', label: 'Home', Icon: HomeIcon },
-  { name: 'menu',
-    label: 'Menu',
-    icon: MenuIcon,
-    listItems: [
-      { name: 'orders', label: 'Orders', icon: StoreIcon},
-      { name: 'recent purchases', label: 'Recent Purchases', icon: AddIcon},
-      { name: 'cart',
-        label: 'Cart',
-        icon: AddShoppingCartIcon,
-        listItems: [
-          { name: 'recently added', label: 'Recently Added', icon: AddIcon },
-          { name: 'go to cart', label: 'Go To Cart', icon: ShoppingCartIcon }
-        ]
-    }
+function onClick(e, item) {
+  window.alert(JSON.stringify(item, null, 2));
+}
+
+const menuItems = [
+  { name: "home", label: "Home", Icon: HomeIcon },
+  "divider",
+  {
+    name: "billing",
+    label: "Billing",
+    Icon: PaymentIcon,
+    menuItems: [
+      { name: "statements", label: "Statements", onClick },
+      { name: "reports", label: "Reports", onClick }
     ]
   },
   "divider",
-  { name: 'account',
-    label: 'Account',
-    icon: AccountBoxIcon,
-    listItems: [
-      { name: 'information', label: 'Information', icon: InfoIcon },
-      { name: 'payments', label: 'Payments', icon: PaymentIcon },
-      { name: 'settings', label: 'Settings', icon: SettingsIcon }
+  {
+    name: "settings",
+    label: "Settings",
+    Icon: SettingsIcon,
+    menuItems: [
+      { name: "profile", label: "Profile" },
+      { name: "insurance", label: "Insurance", onClick },
+      "divider",
+      {
+        name: "notifications",
+        label: "Notifications",
+        Icon: NotificationsIcon,
+        menuItems: [
+          { name: "email", label: "Email", onClick },
+          {
+            name: "desktop",
+            label: "Desktop",
+            Icon: AddShoppingCartIcon,
+            menuItems: [
+              { name: "schedule", label: "Schedule" },
+              { name: "frequency", label: "Frequency" }
+            ]
+          },
+          { name: "sms", label: "SMS" }
+        ]
+      }
     ]
   }
 ];
@@ -44,7 +62,7 @@ const listItems = [
 
 const App = () => {
   return (
-    <Sidebar menuItems={ listItems } />
+    <Sidebar menuItems={ menuItems } />
   )
 }
 
