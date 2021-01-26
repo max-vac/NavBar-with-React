@@ -12,9 +12,9 @@ const style = {
   border: "1px solid rgba(0, 0, 0, 0.1)",
 };
 
-function SidebarItems({ depthStep = 20, depth = 0, expanded, menuItem, ...rest }) {
+function SidebarItems({ depthStep = 20, depth = 0, menuItem, ...rest }) {
   const [collapsed, setCollapsed] = React.useState(true);
-  const { label, menuItems, Icon, onClick: onClickProp } = menuItem;
+  const { label, menuItems, Icon } = menuItem;
 
   function toggleCollapse() {
     setCollapsed(prevValue => !prevValue)
@@ -23,9 +23,6 @@ function SidebarItems({ depthStep = 20, depth = 0, expanded, menuItem, ...rest }
   function onClick(e) {
     if (Array.isArray(menuItems)) {
       toggleCollapse();
-    }
-    if (onClickProp) {
-      onClickProp(menuItems)
     }
   }
 
@@ -85,7 +82,7 @@ function SidebarItems({ depthStep = 20, depth = 0, expanded, menuItem, ...rest }
   );
 };
 
-function Sidebar({ menuItems, depthStep, depth, expanded }) {
+function Sidebar({ menuItems, depthStep, depth }) {
 
   return (
     <div style={ style }>
@@ -98,7 +95,6 @@ function Sidebar({ menuItems, depthStep, depth, expanded }) {
             <SidebarItems
               depthStep={ depthStep }
               depth={ depth }
-              expanded={ expanded }
               menuItem={ items }
             />
           )}
